@@ -1,0 +1,65 @@
+-- Online SQL Editor to Run SQL Online.
+-- Use the editor to create new tables, insert data and all other SQL operations.
+
+--Movies with multiple media:
+
+
+CREATE TABLE movies (
+     id INTEGER AUTO_INCREMENT PRIMARY KEY ,
+    title TEXT,
+    director TEXT,
+    year INTEGER, 
+    length_minutes INTEGER,
+  	synopsis TEXT
+);
+CREATE TABLE movie_media (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  movie_id INT,
+
+  file_path VARCHAR(255),
+  
+  FOREIGN KEY (movie_id) REFERENCES movies(id)
+);
+
+--Movies with multiple genres:
+
+CREATE TABLE genres (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  genereName VARCHAR(255)
+
+);
+
+CREATE TABLE movie_genres (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  movie_id INT,
+  genre_id INT,
+  ...,
+  FOREIGN KEY (movie_id) REFERENCES movies(id),
+  FOREIGN KEY (genre_id) REFERENCES genres(id)
+);
+
+--Artists with multiple skills:
+
+CREATE TABLE artists (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+CREATE TABLE artist_skills (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  artist_id INT,
+  skill VARCHAR(255),
+  FOREIGN KEY (artist_id) REFERENCES artists(id)
+);
+
+--Artists with multiple roles in a single film:
+
+CREATE TABLE movie_roles (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  movie_id INT,
+  artist_id INT,
+  role VARCHAR(255),
+  ...,
+  FOREIGN KEY (movie_id) REFERENCES movies(id),
+  FOREIGN KEY (artist_id) REFERENCES artists(id)
+);
